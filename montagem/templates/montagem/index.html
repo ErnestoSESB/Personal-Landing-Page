@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claudio Montador & Moveleiro</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS via CDN with Custom Config -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            orange: '#ea580c', // Laranja principal
+                            dark: '#2c1e16',   // Marrom escuro elegante (fundo principal)
+                            darker: '#1a110a', // Marrom mais escuro (footer)
+                            light: '#fafaf9',  // Fundo claro (stone-50)
+                            card: '#3d2b1f',   // Fundo card marrom escuro
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Estilos adicionais para esconder scrollbar no carrossel se necessário */
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        /* Personalização do input de arquivo */
+        input[type="file"]::file-selector-button {
+            background-color: #ea580c;
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            margin-right: 1rem;
+            transition: background-color 0.2s;
+        }
+        input[type="file"]::file-selector-button:hover {
+            background-color: #c2410c;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased text-stone-600 bg-brand-light relative">
+
+    <!-- ================= NAVBAR ================= -->
+    <nav class="bg-brand-dark fixed w-full z-40 border-b border-white/5 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <a href="#" class="flex-shrink-0 flex items-center gap-3 cursor-pointer group">
+                    <div class="bg-brand-orange w-10 h-10 rounded flex items-center justify-center text-white group-hover:bg-white group-hover:text-brand-orange transition-colors">
+                        <i class="fa-solid fa-hammer"></i>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="text-white font-serif font-bold text-xl leading-tight">Claudio</span>
+                        <span class="text-brand-orange text-[10px] uppercase tracking-wider font-semibold">Montador & Moveleiro</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#" class="text-white hover:text-brand-orange text-sm font-medium transition">Início</a>
+                    <button onclick="openModal('modal-vendas')" class="text-stone-300 hover:text-white text-sm font-medium flex items-center gap-2 transition cursor-pointer">
+                        <i class="fa-solid fa-box-open text-brand-orange"></i> Móveis à Venda
+                    </button>
+                    <a href="#contato" class="bg-brand-orange text-white px-6 py-2.5 rounded-md text-sm font-semibold hover:bg-orange-700 transition flex items-center gap-2 shadow-lg shadow-orange-900/20">
+                        <i class="fa-brands fa-whatsapp text-lg"></i> Solicitar Orçamento
+                    </a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button class="text-stone-300 hover:text-white focus:outline-none p-2">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ================= HERO SECTION ================= -->
+    <section class="bg-brand-dark pt-32 pb-20 lg:pt-48 lg:pb-32 relative overflow-hidden">
+        <!-- Background Decoration -->
+        <div class="absolute top-0 right-0 -mt-20 -mr-20 w-96 h-96 bg-brand-orange/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 -mb-20 -ml-20 w-80 h-80 bg-black/40 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+                
+                <!-- Hero Content -->
+                <div class="max-w-2xl">
+                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-brand-orange text-xs font-semibold uppercase tracking-wider mb-6">
+                        <i class="fa-solid fa-star"></i>
+                        +10 anos transformando ambientes
+                    </div>
+                    
+                    <h1 class="text-4xl lg:text-6xl font-serif text-white font-bold leading-tight mb-6">
+                        Montagem <br/> profissional <span class="text-brand-orange italic font-normal">de móveis</span> <br/> sob medida
+                    </h1>
+                    
+                    <p class="text-stone-300 text-lg mb-8 leading-relaxed">
+                        Sou Claudio, montador especialista em residências e comércio. Qualidade impecável na montagem e uma seleção exclusiva de móveis para pronta entrega.
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4 mb-12">
+                        <a href="#contato" class="inline-flex justify-center items-center gap-2 bg-brand-orange text-white px-8 py-3.5 rounded-md font-medium hover:bg-orange-700 transition shadow-lg shadow-orange-900/30">
+                            Pedir orçamento <i class="fa-solid fa-arrow-right text-sm"></i>
+                        </a>
+                        <button onclick="openModal('modal-vendas')" class="inline-flex justify-center items-center gap-2 bg-transparent border border-stone-600 text-white px-8 py-3.5 rounded-md font-medium hover:bg-white/5 transition">
+                            Ver catálogo de vendas
+                        </button>
+                    </div>
+
+                    <!-- Stats -->
+                    <div class="grid grid-cols-3 gap-6 pt-8 border-t border-white/10">
+                        <div>
+                            <div class="text-brand-orange text-xl mb-2"><i class="fa-solid fa-hammer"></i></div>
+                            <div class="text-white font-bold text-2xl mb-1">1k+</div>
+                            <div class="text-stone-400 text-sm">Projetos</div>
+                        </div>
+                        <div>
+                            <div class="text-brand-orange text-xl mb-2"><i class="fa-solid fa-shield-check"></i></div>
+                            <div class="text-white font-bold text-2xl mb-1">100%</div>
+                            <div class="text-stone-400 text-sm">Garantia</div>
+                        </div>
+                        <div>
+                            <div class="text-brand-orange text-xl mb-2"><i class="fa-solid fa-gem"></i></div>
+                            <div class="text-white font-bold text-2xl mb-1">Premium</div>
+                            <div class="text-stone-400 text-sm">Acabamento</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hero Image -->
+                <div class="relative hidden lg:block">
+                    <div class="relative rounded-2xl overflow-hidden shadow-2xl border border-white/5">
+                        <img src="https://images.unsplash.com/photo-1581783342308-f792db81db0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Marcenaria e Montagem" class="w-full h-[600px] object-cover opacity-90 hover:scale-105 transition duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/90 via-transparent to-transparent"></div>
+                    </div>
+                    
+                    <!-- Floating Badge -->
+                    <div class="absolute -bottom-6 -left-6 bg-brand-card p-4 rounded-xl border border-white/10 shadow-2xl flex items-center gap-4 animate-bounce hover:animate-none">
+                        <div class="bg-brand-orange text-white w-12 h-12 rounded-full flex items-center justify-center text-xl shadow-lg shadow-orange-900/50">
+                            <i class="fa-solid fa-hand-sparkles"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-white font-bold text-sm">Trabalho artesanal</h4>
+                            <p class="text-stone-400 text-xs">Precisão em cada detalhe</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= INTERACTIVE SERVICES SECTION ================= -->
+    <section class="py-24 bg-brand-light relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-brand-orange font-bold text-xs uppercase tracking-[0.2em] mb-3 block">Especialidades</span>
+                <h2 class="text-3xl md:text-4xl font-serif text-brand-dark mb-4">Soluções completas para seu lar</h2>
+                <p class="text-stone-500">Clique nos serviços abaixo para solicitar um orçamento rápido ou ver nossos produtos.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Card 1: Montagem (Abre Modal) -->
+                <div onclick="openModal('modal-montagem')" class="bg-white p-8 rounded-2xl border border-stone-200 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer group relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-brand-orange/5 rounded-bl-full -z-0 group-hover:bg-brand-orange/10 transition-colors"></div>
+                    <div class="relative z-10">
+                        <div class="w-14 h-14 bg-stone-100 rounded-xl flex items-center justify-center text-stone-700 text-2xl mb-6 group-hover:bg-brand-orange group-hover:text-white transition-colors shadow-sm">
+                            <i class="fa-solid fa-screwdriver-wrench"></i>
+                        </div>
+                        <h3 class="text-xl font-serif text-brand-dark mb-3">Montagem sob Medida</h3>
+                        <p class="text-stone-500 text-sm leading-relaxed mb-6">Montagem profissional de móveis projetados. Precisão milimétrica e cuidado absoluto com seu ambiente.</p>
+                        <span class="text-brand-orange text-sm font-semibold flex items-center gap-2 group-hover:translate-x-2 transition-transform">
+                            Solicitar Orçamento <i class="fa-solid fa-arrow-right"></i>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Card 2: Vendas (Abre Carrossel) -->
+                <div onclick="openModal('modal-vendas')" class="bg-brand-dark p-8 rounded-2xl border border-stone-800 shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 cursor-pointer group relative overflow-hidden">
+                    <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/wood-pattern.png')] opacity-10 mix-blend-overlay"></div>
+                    <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-brand-orange/20 rounded-full blur-2xl group-hover:bg-brand-orange/40 transition-colors"></div>
+                    <div class="relative z-10">
+                        <div class="w-14 h-14 bg-brand-card rounded-xl flex items-center justify-center text-brand-orange text-2xl mb-6 shadow-md border border-white/5">
+                            <i class="fa-solid fa-couch"></i>
+                        </div>
+                        <h3 class="text-xl font-serif text-white mb-3">Móveis à Venda</h3>
+                        <p class="text-stone-400 text-sm leading-relaxed mb-6">Linha premium de móveis a pronta entrega. Racks, mesas, estantes e cadeiras com design exclusivo.</p>
+                        <span class="text-white text-sm font-semibold flex items-center gap-2 group-hover:translate-x-2 transition-transform">
+                            Ver Catálogo <i class="fa-solid fa-arrow-right text-brand-orange"></i>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Card 3: Reparos (Abre Modal) -->
+                <div onclick="openModal('modal-reparos')" class="bg-white p-8 rounded-2xl border border-stone-200 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer group relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-brand-orange/5 rounded-bl-full -z-0 group-hover:bg-brand-orange/10 transition-colors"></div>
+                    <div class="relative z-10">
+                        <div class="w-14 h-14 bg-stone-100 rounded-xl flex items-center justify-center text-stone-700 text-2xl mb-6 group-hover:bg-brand-orange group-hover:text-white transition-colors shadow-sm">
+                            <i class="fa-solid fa-hammer"></i>
+                        </div>
+                        <h3 class="text-xl font-serif text-brand-dark mb-3">Reparos e Ajustes</h3>
+                        <p class="text-stone-500 text-sm leading-relaxed mb-6">Restauração de gavetas, troca de dobradiças, alinhamento de portas e revitalização do seu móvel.</p>
+                        <span class="text-brand-orange text-sm font-semibold flex items-center gap-2 group-hover:translate-x-2 transition-transform">
+                            Solicitar Reparo <i class="fa-solid fa-arrow-right"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= MODALS (HIDDEN BY DEFAULT) ================= -->
+
+    <!-- Modal 1: Montagem de Móveis (Formulário) -->
+    <div id="modal-montagem" class="fixed inset-0 z-50 flex items-center justify-center hidden opacity-0 transition-opacity duration-300 px-4">
+        <!-- Backdrop -->
+        <div class="absolute inset-0 bg-brand-dark/80 backdrop-blur-sm" onclick="closeModal('modal-montagem')"></div>
+        <!-- Modal Content -->
+        <div class="relative bg-white rounded-2xl w-full max-w-lg shadow-2xl overflow-hidden scale-95 transition-transform duration-300 transform-gpu" id="modal-montagem-content">
+            
+            <div class="bg-brand-dark p-6 flex justify-between items-center border-b border-white/10">
+                <h3 class="text-xl font-serif text-white font-semibold flex items-center gap-3">
+                    <i class="fa-solid fa-screwdriver-wrench text-brand-orange"></i> Orçamento de Montagem
+                </h3>
+                <button onclick="closeModal('modal-montagem')" class="text-stone-400 hover:text-white transition bg-white/5 w-8 h-8 rounded-full flex items-center justify-center">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            
+            <div class="p-6 md:p-8">
+                <form class="space-y-4" onsubmit="event.preventDefault(); alert('Formulário enviado com sucesso! Entraremos em contato via WhatsApp.'); closeModal('modal-montagem');">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="col-span-2 md:col-span-1">
+                            <label class="block text-sm font-medium text-stone-700 mb-1">Nome Completo</label>
+                            <input type="text" required class="w-full px-4 py-2.5 rounded-lg border border-stone-300 focus:ring-2 focus:ring-brand-orange focus:border-brand-orange outline-none transition-all">
+                        </div>
+                        <div class="col-span-2 md:col-span-1">
+                            <label class="block text-sm font-medium text-stone-700 mb-1">WhatsApp</label>
+                            <input type="tel" required placeholder="(00) 00000-0000" class="w-full px-4 py-2.5 rounded-lg border border-stone-300 focus:ring-2 focus:ring-brand-orange focus:border-brand-orange outline-none transition-all">
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-stone-700 mb-1">Endereço (Bairro/Cidade)</label>
+                        <input type="text" required class="w-full px-4 py-2.5 rounded-lg border border-stone-300 focus:ring-2 focus:ring-brand-orange focus:border-brand-orange outline-none transition-all">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-stone-700 mb-1">Qual o tipo de móvel?</label>
+                        <select required class="w-full px-4 py-2.5 rounded-lg border border-stone-300 focus:ring-2 focus:ring-brand-orange focus:border-brand-orange outline-none transition-all bg-white">
+                            <option value="">Selecione...</option>
+                            <option value="guarda-roupa">Guarda-Roupa / Armário</option>
+                            <option value="cozinha">Cozinha Completa</option>
+                            <option value="painel">Painel / Rack</option>
+                            <option value="outro">Outro (especificar na mensagem)</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-stone-700 mb-1">Foto do Projeto/Móvel (Opcional)</label>
+                        <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-stone-300 border-dashed rounded-lg hover:border-brand-orange transition-colors bg-stone-50">
+                            <div class="space-y-1 text-center">
+                                <i class="fa-solid fa-cloud-arrow-up text-3xl text-stone-400 mb-2"></i>
+                                <div class="flex text-sm text-stone-600 justify-center">
+                                    <label class="relative cursor-pointer bg-white rounded-md font-medium text-brand-orange hover:text-orange-700 focus-within:outline-none">
+                                        <span>Fazer upload de arquivo</span>
+                                        <input type="file" class="sr-only" accept="image/*">
+                                    </label>
+                                </div>
+                                <p class="text-xs text-stone-500">PNG, JPG, GIF até 10MB</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="w-full bg-brand-orange text-white py-3.5 rounded-lg font-semibold hover:bg-orange-700 transition shadow-lg shadow-orange-900/20 mt-4 flex justify-center items-center gap-2">
+                        Enviar para o WhatsApp <i class="fa-brands fa-whatsapp text-lg"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 2: Carrossel de Móveis à Venda -->
+    <div id="modal-vendas" class="fixed inset-0 z-50 flex items-center justify-center hidden opacity-0 transition-opacity duration-300 px-4">
+        <!-- Backdrop -->
+        <div class="absolute inset-0 bg-brand-dark/90 backdrop-blur-md" onclick="closeModal('modal-vendas')"></div>
+        
+        <!-- Modal Content (Carousel Wrapper) -->
+        <div class="relative w-full max-w-4xl scale-95 transition-transform duration-300 transform-gpu" id="modal-vendas-content">
+            
+            <!-- Close Button -->
+            <button onclick="closeModal('modal-vendas')" class="absolute -top-12 right-0 text-white hover:text-brand-orange transition bg-white/10 w-10 h-10 rounded-full flex items-center justify-center z-10 backdrop-blur-sm border border-white/20">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+
+            <!-- Carousel Container -->
+            <div class="relative rounded-2xl overflow-hidden bg-brand-card shadow-2xl border border-white/10 flex flex-col md:flex-row">
+                
+                <!-- Track -->
+                <div class="overflow-hidden w-full relative">
+                    <div id="carousel-track" class="flex transition-transform duration-500 ease-out w-full h-full">
+                        
+                        <!-- Slide 1 -->
+                        <div class="min-w-full flex flex-col md:flex-row items-stretch">
+                            <div class="w-full md:w-1/2 h-64 md:h-[500px] relative">
+                                <img src="https://images.unsplash.com/photo-1595428774223-ef52624120d2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover" alt="Sofá">
+                                <div class="absolute inset-0 bg-gradient-to-t from-brand-card via-transparent to-transparent md:hidden"></div>
+                                <div class="absolute inset-0 bg-gradient-to-r from-transparent to-brand-card hidden md:block"></div>
+                            </div>
+                            <div class="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center relative bg-brand-card">
+                                <span class="bg-brand-orange/20 text-brand-orange text-xs font-bold px-3 py-1 rounded-full w-max mb-4 uppercase tracking-wider">Pronta Entrega</span>
+                                <h2 class="text-3xl font-serif text-white mb-4">Poltrona de Leitura Windsor</h2>
+                                <p class="text-stone-400 mb-6 leading-relaxed">Design clássico com acabamento em couro sintético premium e pés de madeira maciça. Conforto inigualável para seu escritório ou sala.</p>
+                                <div class="text-3xl font-bold text-white mb-8">R$ 850<span class="text-sm text-stone-500 font-normal">,00</span></div>
+                                <a href="https://wa.me/5500000000000?text=Olá, tenho interesse na Poltrona Windsor!" target="_blank" class="w-full bg-brand-orange text-white py-4 rounded-lg font-semibold hover:bg-orange-600 transition shadow-lg text-center flex items-center justify-center gap-2">
+                                    <i class="fa-brands fa-whatsapp text-xl"></i> Comprar agora
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Slide 2 -->
+                        <div class="min-w-full flex flex-col md:flex-row items-stretch">
+                            <div class="w-full md:w-1/2 h-64 md:h-[500px] relative">
+                                <img src="https://images.unsplash.com/photo-1533090481720-856c6e3c1fdc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover" alt="Mesa">
+                                <div class="absolute inset-0 bg-gradient-to-t from-brand-card via-transparent to-transparent md:hidden"></div>
+                                <div class="absolute inset-0 bg-gradient-to-r from-transparent to-brand-card hidden md:block"></div>
+                            </div>
+                            <div class="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center relative bg-brand-card">
+                                <span class="bg-brand-orange/20 text-brand-orange text-xs font-bold px-3 py-1 rounded-full w-max mb-4 uppercase tracking-wider">Mais Vendido</span>
+                                <h2 class="text-3xl font-serif text-white mb-4">Mesa de Jantar Industrial</h2>
+                                <p class="text-stone-400 mb-6 leading-relaxed">Tampo em madeira de lei com borda orgânica e pés em aço carbono pintura eletrostática. Comporta confortavelmente 6 pessoas.</p>
+                                <div class="text-3xl font-bold text-white mb-8">R$ 1.420<span class="text-sm text-stone-500 font-normal">,00</span></div>
+                                <a href="https://wa.me/5500000000000?text=Olá, tenho interesse na Mesa Industrial!" target="_blank" class="w-full bg-brand-orange text-white py-4 rounded-lg font-semibold hover:bg-orange-600 transition shadow-lg text-center flex items-center justify-center gap-2">
+                                    <i class="fa-brands fa-whatsapp text-xl"></i> Comprar agora
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Slide 3 -->
+                        <div class="min-w-full flex flex-col md:flex-row items-stretch">
+                            <div class="w-full md:w-1/2 h-64 md:h-[500px] relative">
+                                <img src="https://images.unsplash.com/photo-1594026112284-02bb6f3352fe?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover" alt="Rack">
+                                <div class="absolute inset-0 bg-gradient-to-t from-brand-card via-transparent to-transparent md:hidden"></div>
+                                <div class="absolute inset-0 bg-gradient-to-r from-transparent to-brand-card hidden md:block"></div>
+                            </div>
+                            <div class="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center relative bg-brand-card">
+                                <span class="bg-stone-700/50 text-stone-300 text-xs font-bold px-3 py-1 rounded-full w-max mb-4 uppercase tracking-wider">Lançamento</span>
+                                <h2 class="text-3xl font-serif text-white mb-4">Rack TV Minimalista</h2>
+                                <p class="text-stone-400 mb-6 leading-relaxed">Linhas retas e design clean. Portas com sistema fecho-toque e espaço para organização de cabos. Perfeito para salas contemporâneas.</p>
+                                <div class="text-3xl font-bold text-white mb-8">R$ 690<span class="text-sm text-stone-500 font-normal">,00</span></div>
+                                <a href="https://wa.me/5500000000000?text=Olá, tenho interesse no Rack Minimalista!" target="_blank" class="w-full bg-brand-orange text-white py-4 rounded-lg font-semibold hover:bg-orange-600 transition shadow-lg text-center flex items-center justify-center gap-2">
+                                    <i class="fa-brands fa-whatsapp text-xl"></i> Comprar agora
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Navigation Arrows -->
+                <button onclick="prevSlide()" class="absolute left-4 top-1/3 md:top-1/2 -translate-y-1/2 w-12 h-12 bg-white/10 hover:bg-brand-orange backdrop-blur-md rounded-full flex items-center justify-center text-white transition-all shadow-lg border border-white/20 z-10 group">
+                    <i class="fa-solid fa-chevron-left group-hover:-translate-x-1 transition-transform"></i>
+                </button>
+                <button onclick="nextSlide()" class="absolute right-4 top-1/3 md:top-1/2 -translate-y-1/2 w-12 h-12 bg-white/10 hover:bg-brand-orange backdrop-blur-md rounded-full flex items-center justify-center text-white transition-all shadow-lg border border-white/20 z-10 group">
+                    <i class="fa-solid fa-chevron-right group-hover:translate-x-1 transition-transform"></i>
+                </button>
+                
+                <!-- Dots -->
+                <div class="absolute bottom-4 left-1/2 md:left-1/4 -translate-x-1/2 flex gap-2 z-10">
+                    <div class="w-2.5 h-2.5 rounded-full bg-brand-orange transition-colors carousel-dot"></div>
+                    <div class="w-2.5 h-2.5 rounded-full bg-white/30 transition-colors carousel-dot"></div>
+                    <div class="w-2.5 h-2.5 rounded-full bg-white/30 transition-colors carousel-dot"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 3: Reparos (Formulário) -->
+    <div id="modal-reparos" class="fixed inset-0 z-50 flex items-center justify-center hidden opacity-0 transition-opacity duration-300 px-4">
+        <!-- Backdrop -->
+        <div class="absolute inset-0 bg-brand-dark/80 backdrop-blur-sm" onclick="closeModal('modal-reparos')"></div>
+        <!-- Modal Content -->
+        <div class="relative bg-white rounded-2xl w-full max-w-lg shadow-2xl overflow-hidden scale-95 transition-transform duration-300 transform-gpu" id="modal-reparos-content">
+            
+            <div class="bg-brand-dark p-6 flex justify-between items-center border-b border-white/10">
+                <h3 class="text-xl font-serif text-white font-semibold flex items-center gap-3">
+                    <i class="fa-solid fa-notes-medical text-brand-orange"></i> Solicitar Reparo
+                </h3>
+                <button onclick="closeModal('modal-reparos')" class="text-stone-400 hover:text-white transition bg-white/5 w-8 h-8 rounded-full flex items-center justify-center">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            
+            <div class="p-6 md:p-8">
+                <form class="space-y-4" onsubmit="event.preventDefault(); alert('Solicitação enviada! Responderemos no WhatsApp em breve.'); closeModal('modal-reparos');">
+                    <div>
+                        <label class="block text-sm font-medium text-stone-700 mb-1">Nome Completo</label>
+                        <input type="text" required class="w-full px-4 py-2.5 rounded-lg border border-stone-300 focus:ring-2 focus:ring-brand-orange focus:border-brand-orange outline-none transition-all">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-stone-700 mb-1">WhatsApp</label>
+                        <input type="tel" required placeholder="(00) 00000-0000" class="w-full px-4 py-2.5 rounded-lg border border-stone-300 focus:ring-2 focus:ring-brand-orange focus:border-brand-orange outline-none transition-all">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-stone-700 mb-1">Descreva o Problema</label>
+                        <textarea rows="3" required placeholder="Ex: A porta do guarda-roupa soltou a dobradiça e a gaveta está emperrando..." class="w-full px-4 py-2.5 rounded-lg border border-stone-300 focus:ring-2 focus:ring-brand-orange focus:border-brand-orange outline-none transition-all resize-none"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-stone-700 mb-1">Foto do Dano (Importante)</label>
+                        <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-stone-300 border-dashed rounded-lg hover:border-brand-orange transition-colors bg-stone-50">
+                            <div class="space-y-1 text-center">
+                                <i class="fa-solid fa-camera text-3xl text-stone-400 mb-2"></i>
+                                <div class="flex justify-center text-sm text-stone-600">
+                                    <label class="relative cursor-pointer bg-white rounded-md font-medium text-brand-orange hover:text-orange-700 focus-within:outline-none">
+                                        <span>Anexar foto</span>
+                                        <input type="file" class="sr-only" accept="image/*" required>
+                                    </label>
+                                </div>
+                                <p class="text-xs text-stone-500">Isso ajuda a dar um orçamento exato.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="w-full bg-brand-dark text-white py-3.5 rounded-lg font-semibold hover:bg-stone-800 transition shadow-lg mt-4 flex justify-center items-center gap-2">
+                        Enviar Avaliação <i class="fa-solid fa-paper-plane text-sm"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ================= ABOUT SECTION ================= -->
+    <section class="py-24 bg-white border-t border-stone-100 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                
+                <!-- Images (Left) -->
+                <div class="relative">
+                    <div class="grid grid-cols-2 gap-4 relative z-10">
+                        <img src="https://images.unsplash.com/photo-1622372738946-62e02505feb3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Trabalho com madeira" class="rounded-2xl w-full h-80 object-cover mt-12 shadow-lg">
+                        <img src="https://images.unsplash.com/photo-1540638349517-3abd5afc5847?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Ferramentas" class="rounded-2xl w-full h-80 object-cover shadow-lg">
+                    </div>
+                    <!-- Decorative small image overlapping -->
+                    <div class="absolute -bottom-10 left-1/2 -translate-x-1/2 w-48 h-48 rounded-2xl border-8 border-white overflow-hidden shadow-2xl z-20">
+                        <img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Detalhe madeira" class="w-full h-full object-cover">
+                    </div>
+                    <!-- Blob background -->
+                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-stone-100 rounded-full blur-3xl -z-10"></div>
+                </div>
+
+                <!-- Content (Right) -->
+                <div class="lg:pl-8 mt-12 lg:mt-0">
+                    <span class="text-brand-orange font-bold text-xs uppercase tracking-[0.2em] mb-3 block">Sobre Claudio</span>
+                    <h2 class="text-3xl md:text-4xl font-serif text-brand-dark mb-6 leading-tight">Mais de uma década trabalhando com madeira e cuidado</h2>
+                    
+                    <p class="text-stone-500 mb-8 leading-relaxed">
+                        Claudio é montador profissional com mais de 10 anos de experiência. Começou como aprendiz em uma marcenaria e hoje atende clientes em toda a região com montagem de móveis, projetos sob medida e venda de móveis de alta qualidade.
+                    </p>
+
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-start gap-4">
+                            <div class="mt-1 w-6 h-6 rounded-full bg-orange-100 flex items-center justify-center text-brand-orange flex-shrink-0 shadow-inner">
+                                <i class="fa-solid fa-ruler text-xs"></i>
+                            </div>
+                            <span class="text-stone-600">Medição e projeto precisos para cada ambiente</span>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div class="mt-1 w-6 h-6 rounded-full bg-orange-100 flex items-center justify-center text-brand-orange flex-shrink-0 shadow-inner">
+                                <i class="fa-solid fa-hammer text-xs"></i>
+                            </div>
+                            <span class="text-stone-600">Montagem cuidadosa com ferramentas profissionais</span>
+                        </li>
+                    </ul>
+
+                    <div class="bg-stone-50 border border-stone-200 rounded-xl p-5 mb-8 flex gap-4 items-start shadow-sm">
+                        <i class="fa-regular fa-circle-check text-brand-orange text-xl mt-0.5"></i>
+                        <div>
+                            <h4 class="font-semibold text-brand-dark text-sm mb-1">Garantia de satisfação</h4>
+                            <p class="text-stone-500 text-xs leading-relaxed">Todos os serviços têm garantia. Se algo não ficou como combinado, volto e ajusto sem custo adicional.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= HOW IT WORKS SECTION ================= -->
+    <section class="py-24 bg-brand-dark relative">
+        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-brand-orange font-bold text-xs uppercase tracking-[0.2em] mb-3 block">Como Funciona</span>
+                <h2 class="text-3xl md:text-4xl font-serif text-white mb-4">Do primeiro contato ao ambiente pronto</h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 relative">
+                <!-- Arrow Connectors (Desktop only) -->
+                <div class="hidden lg:block absolute top-1/2 left-[23%] w-[4%] border-t border-dashed border-stone-600 -translate-y-1/2 z-0"></div>
+                <div class="hidden lg:block absolute top-1/2 left-[48%] w-[4%] border-t border-dashed border-stone-600 -translate-y-1/2 z-0"></div>
+                <div class="hidden lg:block absolute top-1/2 left-[73%] w-[4%] border-t border-dashed border-stone-600 -translate-y-1/2 z-0"></div>
+
+                <!-- Steps -->
+                <div class="bg-brand-card p-8 rounded-xl border border-white/5 relative z-10 hover:border-brand-orange/50 transition-colors group">
+                    <div class="absolute top-4 right-4 text-5xl font-serif text-stone-600 opacity-20 font-bold group-hover:text-brand-orange transition-colors">01</div>
+                    <div class="w-12 h-12 bg-black/30 rounded-lg flex items-center justify-center text-brand-orange text-xl mb-6">
+                        <i class="fa-regular fa-message"></i>
+                    </div>
+                    <h3 class="text-xl font-serif text-white mb-3">Contato</h3>
+                    <p class="text-stone-400 text-sm leading-relaxed">Você chama e descreve o que precisa pelo WhatsApp.</p>
+                </div>
+
+                <div class="bg-brand-card p-8 rounded-xl border border-white/5 relative z-10 hover:border-brand-orange/50 transition-colors group">
+                    <div class="absolute top-4 right-4 text-5xl font-serif text-stone-600 opacity-20 font-bold group-hover:text-brand-orange transition-colors">02</div>
+                    <div class="w-12 h-12 bg-black/30 rounded-lg flex items-center justify-center text-brand-orange text-xl mb-6">
+                        <i class="fa-solid fa-clipboard-list"></i>
+                    </div>
+                    <h3 class="text-xl font-serif text-white mb-3">Orçamento</h3>
+                    <p class="text-stone-400 text-sm leading-relaxed">Avaliação rápida e envio de orçamento claro, sem surpresas.</p>
+                </div>
+
+                <div class="bg-brand-card p-8 rounded-xl border border-white/5 relative z-10 hover:border-brand-orange/50 transition-colors group">
+                    <div class="absolute top-4 right-4 text-5xl font-serif text-stone-600 opacity-20 font-bold group-hover:text-brand-orange transition-colors">03</div>
+                    <div class="w-12 h-12 bg-black/30 rounded-lg flex items-center justify-center text-brand-orange text-xl mb-6">
+                        <i class="fa-solid fa-screwdriver-wrench"></i>
+                    </div>
+                    <h3 class="text-xl font-serif text-white mb-3">Execução</h3>
+                    <p class="text-stone-400 text-sm leading-relaxed">Montagem ou fabricação com precisão, no prazo combinado.</p>
+                </div>
+
+                <div class="bg-brand-card p-8 rounded-xl border border-white/5 relative z-10 hover:border-brand-orange/50 transition-colors group">
+                    <div class="absolute top-4 right-4 text-5xl font-serif text-stone-600 opacity-20 font-bold group-hover:text-brand-orange transition-colors">04</div>
+                    <div class="w-12 h-12 bg-black/30 rounded-lg flex items-center justify-center text-brand-orange text-xl mb-6">
+                        <i class="fa-regular fa-circle-check"></i>
+                    </div>
+                    <h3 class="text-xl font-serif text-white mb-3">Entrega</h3>
+                    <p class="text-stone-400 text-sm leading-relaxed">Ambiente limpo, móvel revisado e pronto para uso.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= TESTIMONIALS SECTION ================= -->
+    <section class="py-24 bg-brand-light">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-brand-orange font-bold text-xs uppercase tracking-[0.2em] mb-3 block">Depoimentos</span>
+                <h2 class="text-3xl md:text-4xl font-serif text-brand-dark mb-4">Clientes satisfeitos com o resultado</h2>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Review 1 -->
+                <div class="bg-white p-8 rounded-2xl border border-stone-100 shadow-sm relative">
+                    <div class="absolute top-6 left-6 text-brand-orange opacity-10 text-6xl font-serif leading-none">"</div>
+                    <div class="relative z-10 pt-4">
+                        <div class="flex text-brand-orange text-sm mb-4 gap-1">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-stone-600 mb-6 italic text-sm leading-relaxed">
+                            "Claudio montou nosso guarda-roupa e a cozinha toda. Trabalho impecável, pontual e limpo. Recomendo de olhos fechados!"
+                        </p>
+                        <div class="flex items-center gap-3 mt-auto">
+                            <div class="w-10 h-10 rounded-full bg-brand-dark text-white flex items-center justify-center font-bold text-sm">M</div>
+                            <div>
+                                <h5 class="text-brand-dark font-semibold text-sm">Mariana Costa</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 2 -->
+                <div class="bg-white p-8 rounded-2xl border border-stone-100 shadow-sm relative">
+                    <div class="absolute top-6 left-6 text-brand-orange opacity-10 text-6xl font-serif leading-none">"</div>
+                    <div class="relative z-10 pt-4">
+                        <div class="flex text-brand-orange text-sm mb-4 gap-1">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-stone-600 mb-6 italic text-sm leading-relaxed">
+                            "Comprei a mesa de jantar que ele vende e também contratei a montagem. Ficou perfeita, super resistente."
+                        </p>
+                        <div class="flex items-center gap-3 mt-auto">
+                            <div class="w-10 h-10 rounded-full bg-brand-dark text-white flex items-center justify-center font-bold text-sm">R</div>
+                            <div>
+                                <h5 class="text-brand-dark font-semibold text-sm">Roberto Lima</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 3 -->
+                <div class="bg-white p-8 rounded-2xl border border-stone-100 shadow-sm relative">
+                    <div class="absolute top-6 left-6 text-brand-orange opacity-10 text-6xl font-serif leading-none">"</div>
+                    <div class="relative z-10 pt-4">
+                        <div class="flex text-brand-orange text-sm mb-4 gap-1">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-stone-600 mb-6 italic text-sm leading-relaxed">
+                            "Precisava consertar as gavetas da minha estante. Ele foi super rápido e cobrou um preço muito justo. Serviço excelente."
+                        </p>
+                        <div class="flex items-center gap-3 mt-auto">
+                            <div class="w-10 h-10 rounded-full bg-brand-dark text-white flex items-center justify-center font-bold text-sm">P</div>
+                            <div>
+                                <h5 class="text-brand-dark font-semibold text-sm">Patricia Souza</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= CTA BANNER ================= -->
+    <section id="contato" class="py-20 bg-brand-orange relative overflow-hidden">
+        <div class="absolute -top-24 -left-24 w-64 h-64 bg-white/10 rounded-full blur-2xl"></div>
+        <div class="absolute -bottom-24 -right-24 w-80 h-80 bg-black/10 rounded-full blur-2xl"></div>
+        
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <h2 class="text-3xl md:text-5xl font-serif text-white font-bold mb-6">Pronto para transformar seu espaço?</h2>
+            <p class="text-orange-50 text-lg mb-10 max-w-2xl mx-auto">Solicite um orçamento sem compromisso. Atendo toda a região com agilidade e qualidade.</p>
+            
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4 mb-6">
+                <a href="https://wa.me/5500000000000" target="_blank" class="w-full sm:w-auto bg-white text-brand-orange px-8 py-4 rounded-md font-bold hover:bg-stone-100 transition flex items-center justify-center gap-2 shadow-xl hover:shadow-2xl hover:-translate-y-1">
+                    <i class="fa-brands fa-whatsapp text-xl"></i> Chamar no WhatsApp
+                </a>
+            </div>
+            
+            <div class="inline-flex items-center gap-2 text-white/90 font-medium">
+                <i class="fa-solid fa-phone"></i> (00) 00000-0000
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="bg-brand-darker pt-16 pb-8 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-8 mb-12">
+                
+                <div class="md:col-span-12 lg:col-span-4">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="bg-brand-orange w-8 h-8 rounded flex items-center justify-center text-white text-sm">
+                            <i class="fa-solid fa-hammer"></i>
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="text-white font-serif font-bold text-lg leading-none">Claudio</span>
+                            <span class="text-stone-500 text-[9px] uppercase tracking-wider font-semibold">Montador & Moveleiro</span>
+                        </div>
+                    </div>
+                    <p class="text-stone-400 text-sm leading-relaxed max-w-sm">
+                        Montagem profissional e venda de móveis de alta qualidade. Transformando ambientes com elegância e durabilidade.
+                    </p>
+                </div>
+
+                <div class="md:col-span-6 lg:col-span-4 lg:ml-auto">
+                    <h4 class="text-white font-serif font-semibold mb-6">Contato</h4>
+                    <ul class="space-y-4">
+                        <li>
+                            <a href="#" class="text-stone-400 hover:text-brand-orange transition text-sm flex items-center gap-3">
+                                <i class="fa-brands fa-whatsapp w-4 text-center"></i> (00) 00000-0000
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-stone-400 hover:text-brand-orange transition text-sm flex items-center gap-3">
+                                <i class="fa-regular fa-envelope w-4 text-center"></i> contato@claudiomontador.com.br
+                            </a>
+                        </li>
+                        <li class="text-stone-400 text-sm flex items-start gap-3">
+                            <i class="fa-solid fa-location-dot w-4 text-center mt-1"></i> 
+                            <span>Atendimento em toda a região</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="md:col-span-6 lg:col-span-4 lg:ml-auto">
+                    <h4 class="text-white font-serif font-semibold mb-6">Redes Sociais</h4>
+                    <div class="flex gap-3">
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-stone-400 hover:text-white hover:bg-brand-orange transition">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-stone-400 hover:text-white hover:bg-brand-orange transition">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="border-t border-white/10 pt-8 text-center md:text-left flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-stone-500 text-xs">
+                    &copy; 2026 Claudio Montador. Todos os direitos reservados.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ================= JAVASCRIPT ================= -->
+    <script>
+        // Modal Logic
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            const content = document.getElementById(modalId + '-content');
+            
+            // Show modal wrapper
+            modal.classList.remove('hidden');
+            
+            // Trigger animation in next frame
+            requestAnimationFrame(() => {
+                modal.classList.remove('opacity-0');
+                modal.classList.add('opacity-100');
+                content.classList.remove('scale-95');
+                content.classList.add('scale-100');
+            });
+            
+            // Prevent body scroll
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            const content = document.getElementById(modalId + '-content');
+            
+            // Reverse animation
+            modal.classList.remove('opacity-100');
+            modal.classList.add('opacity-0');
+            content.classList.remove('scale-100');
+            content.classList.add('scale-95');
+            
+            // Hide after animation finishes (300ms matches Tailwind duration)
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                document.body.style.overflow = 'auto'; // Restore scroll
+            }, 300);
+        }
+
+        // Close modals on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                const modals = ['modal-montagem', 'modal-vendas', 'modal-reparos'];
+                modals.forEach(id => {
+                    const modal = document.getElementById(id);
+                    if (!modal.classList.contains('hidden')) {
+                        closeModal(id);
+                    }
+                });
+            }
+        });
+
+        // Carousel Logic
+        let currentSlide = 0;
+        const totalSlides = 3; // Must match number of slides in HTML
+        const track = document.getElementById('carousel-track');
+        const dots = document.querySelectorAll('.carousel-dot');
+
+        function updateCarousel() {
+            // Move track
+            track.style.transform = `translateX(-${currentSlide * 100}%)`;
+            
+            // Update dots
+            dots.forEach((dot, index) => {
+                if (index === currentSlide) {
+                    dot.classList.remove('bg-white/30');
+                    dot.classList.add('bg-brand-orange');
+                } else {
+                    dot.classList.remove('bg-brand-orange');
+                    dot.classList.add('bg-white/30');
+                }
+            });
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateCarousel();
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateCarousel();
+        }
+        
+        // Optional: Auto-play carousel
+        let carouselInterval;
+        
+        // Start auto-play when modal opens (optional enhancement)
+        document.querySelector('[onclick="openModal(\'modal-vendas\')"]').addEventListener('click', () => {
+            clearInterval(carouselInterval);
+            carouselInterval = setInterval(nextSlide, 5000); // 5 seconds per slide
+        });
+        
+        // Clear interval on modal close to save resources
+        document.querySelector('[onclick="closeModal(\'modal-vendas\')"]').addEventListener('click', () => {
+            clearInterval(carouselInterval);
+        });
+        
+    </script>
+</body>
+</html>
