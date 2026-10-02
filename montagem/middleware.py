@@ -1,4 +1,4 @@
-"""Contagem de acessos ao site para exibir no painel administrativo."""
+
 from django.utils import timezone
 
 from .models import VisitaSite
@@ -14,7 +14,6 @@ def get_client_ip(request):
 
 
 class ContadorAcessosMiddleware:
-    """Registra 1 acesso por sessão/hora (evita inflar o número ao recarregar)."""
 
     def __init__(self, get_response):
         self.get_response = get_response
