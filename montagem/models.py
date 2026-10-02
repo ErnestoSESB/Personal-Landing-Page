@@ -2,8 +2,6 @@ from django.db import models
 
 
 class Servico(models.Model):
-    """Um tipo de serviço de montagem oferecido (ex.: guarda-roupa, cozinha)."""
-
     titulo = models.CharField(max_length=80)
     descricao = models.TextField()
     ordem = models.PositiveIntegerField(default=0)
@@ -18,8 +16,7 @@ class Servico(models.Model):
 
 
 class Projeto(models.Model):
-    """Um móvel já montado, exibido na galeria do portfólio."""
-
+    
     titulo = models.CharField(max_length=80)
     tipo_movel = models.CharField("Tipo de móvel", max_length=60)
     bairro = models.CharField("Bairro / cidade", max_length=60)
@@ -42,7 +39,7 @@ class Projeto(models.Model):
 
 
 class Depoimento(models.Model):
-    """Avaliação de um cliente atendido."""
+
 
     nome = models.CharField(max_length=80)
     cidade = models.CharField(max_length=80)
@@ -58,8 +55,7 @@ class Depoimento(models.Model):
 
 
 class SolicitacaoOrcamento(models.Model):
-    """Pedido de orçamento enviado pelo formulário de contato."""
-
+    
     nome = models.CharField(max_length=100)
     telefone = models.CharField(max_length=30)
     tipo_servico = models.CharField(max_length=100, blank=True)
@@ -73,3 +69,20 @@ class SolicitacaoOrcamento(models.Model):
 
     def __str__(self):
         return f"{self.nome} — {self.criado_em:%d/%m/%Y}"
+
+
+class VisitaSite(models.Model):
+    
+    criado_em = models.DateTimeField(auto_now_add=True)
+    path = models.CharField(max_length=200, default="/")
+    ip = models.GenericIPAddressField(null=True, blank=True)
+    user_agent = models.CharField(max_length=250, blank=True)
+
+    class Meta:
+        ordering = ["-criado_em"]
+        verbose_name = "Acesso ao site"
+        verbose_name_plural = "Acessos ao site"
+
+    def __str__(self):
+        return f"{self.path} — {self.criado_em:%d/%m/%Y %H:%M}"
+
