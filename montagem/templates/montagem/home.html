@@ -81,7 +81,7 @@
                     <button onclick="openModal('modal-vendas')" class="text-stone-300 hover:text-white text-sm font-medium flex items-center gap-2 transition cursor-pointer">
                         <i class="fa-solid fa-box-open text-brand-orange"></i> Móveis à Venda
                     </button>
-                    <a href="#contato" class="bg-brand-orange text-white px-6 py-2.5 rounded-md text-sm font-semibold hover:bg-orange-700 transition flex items-center gap-2 shadow-lg shadow-orange-900/20">
+                    <a href="https://wa.me/5584987471935" class="bg-brand-orange text-white px-6 py-2.5 rounded-md text-sm font-semibold hover:bg-orange-700 transition flex items-center gap-2 shadow-lg shadow-orange-900/20">
                         <i class="fa-brands fa-whatsapp text-lg"></i> Solicitar Orçamento
                     </a>
                 </div>
@@ -144,11 +144,11 @@
                     <div class="grid grid-cols-3 gap-6 pt-8 border-t border-white/10">
                         <div>
                             <div class="text-brand-orange text-xl mb-2"><i class="fa-solid fa-hammer"></i></div>
-                            <div class="text-white font-bold text-2xl mb-1">1k+</div>
+                            <div class="text-white font-bold text-2xl mb-1">+ de 500</div>
                             <div class="text-stone-400 text-sm">Projetos</div>
                         </div>
                         <div>
-                            <div class="text-brand-orange text-xl mb-2"><i class="fa-solid fa-shield-check"></i></div>
+                            <div class="text-brand-orange text-xl mb-2"><i class="fa-solid fa-shield-halved"></i></div>
                             <div class="text-white font-bold text-2xl mb-1">100%</div>
                             <div class="text-stone-400 text-sm">Garantia</div>
                         </div>
@@ -262,21 +262,20 @@
             </div>
             
             <div class="p-6 md:p-8">
-                <form class="space-y-4" onsubmit="event.preventDefault(); alert('Formulário enviado com sucesso! Entraremos em contato via WhatsApp.'); closeModal('modal-montagem');">
+                <form class="space-y-4" onsubmit="enviarWhatsApp(event);">
                     <div class="grid grid-cols-2 gap-4">
                         <div class="col-span-2 md:col-span-1">
                             <label class="block text-sm font-medium text-stone-700 mb-1">Nome Completo</label>
-                            <input type="text" required class="w-full px-4 py-2.5 rounded-lg border border-stone-300 focus:ring-2 focus:ring-brand-orange focus:border-brand-orange outline-none transition-all">
+                            <input id="nome" type="text" required class="w-full px-4 py-2.5 rounded-lg border border-stone-300 focus:ring-2 focus:ring-brand-orange focus:border-brand-orange outline-none transition-all">
                         </div>
                         <div class="col-span-2 md:col-span-1">
                             <label class="block text-sm font-medium text-stone-700 mb-1">WhatsApp</label>
-                            <input type="tel" required placeholder="(00) 00000-0000" class="w-full px-4 py-2.5 rounded-lg border border-stone-300 focus:ring-2 focus:ring-brand-orange focus:border-brand-orange outline-none transition-all">
+                            <input id="whatsapp" max-length="11" type="tel" required placeholder="(00) 00000-0000" class="w-full px-4 py-2.5 rounded-lg border border-stone-300 focus:ring-2 focus:ring-brand-orange focus:border-brand-orange outline-none transition-all">
                         </div>
                     </div>
-                    
                     <div>
                         <label class="block text-sm font-medium text-stone-700 mb-1">Endereço (Bairro/Cidade)</label>
-                        <input type="text" required class="w-full px-4 py-2.5 rounded-lg border border-stone-300 focus:ring-2 focus:ring-brand-orange focus:border-brand-orange outline-none transition-all">
+                        <input id="endereco" type="text" required class="w-full px-4 py-2.5 rounded-lg border border-stone-300 focus:ring-2 focus:ring-brand-orange focus:border-brand-orange outline-none transition-all">
                     </div>
                     
                     <div>
@@ -298,7 +297,7 @@
                                 <div class="flex text-sm text-stone-600 justify-center">
                                     <label class="relative cursor-pointer bg-white rounded-md font-medium text-brand-orange hover:text-orange-700 focus-within:outline-none">
                                         <span>Fazer upload de arquivo</span>
-                                        <input type="file" class="sr-only" accept="image/*">
+                                        <input id="foto-projeto" type="file" class="sr-only" accept="image/*">
                                     </label>
                                 </div>
                                 <p class="text-xs text-stone-500">PNG, JPG, GIF até 10MB</p>
@@ -306,7 +305,7 @@
                         </div>
                     </div>
 
-                    <button type="submit" class="w-full bg-brand-orange text-white py-3.5 rounded-lg font-semibold hover:bg-orange-700 transition shadow-lg shadow-orange-900/20 mt-4 flex justify-center items-center gap-2">
+                    <button href="https://wa.me/5584999999999?text=MENSAGEM" type="submit" class="w-full bg-brand-orange text-white py-3.5 rounded-lg font-semibold hover:bg-orange-700 transition shadow-lg shadow-orange-900/20 mt-4 flex justify-center items-center gap-2">
                         Enviar para o WhatsApp <i class="fa-brands fa-whatsapp text-lg"></i>
                     </button>
                 </form>
@@ -486,18 +485,17 @@
                 <!-- Content (Right) -->
                 <div class="lg:pl-8 mt-12 lg:mt-0">
                     <span class="text-brand-orange font-bold text-xs uppercase tracking-[0.2em] mb-3 block">Sobre Claudio</span>
-                    <h2 class="text-3xl md:text-4xl font-serif text-brand-dark mb-6 leading-tight">Mais de uma década trabalhando com madeira e cuidado</h2>
+                    <h2 class="text-3xl md:text-4xl font-serif text-brand-dark mb-6 leading-tight">Há 3 anos trabalhando com cuidado e dedicação</h2>
                     
                     <p class="text-stone-500 mb-8 leading-relaxed">
-                        Claudio é montador profissional com mais de 10 anos de experiência. Começou como aprendiz em uma marcenaria e hoje atende clientes em toda a região com montagem de móveis, projetos sob medida e venda de móveis de alta qualidade.
+                        Claudio é montador profissional com mais de 3 anos de experiência. Começou como aprendiz nas Casas Bahia e hoje atende clientes em toda a região metropolitana com montagem de móveis, projetos sob medida e venda de móveis de alta qualidade.
                     </p>
-
                     <ul class="space-y-4 mb-8">
                         <li class="flex items-start gap-4">
                             <div class="mt-1 w-6 h-6 rounded-full bg-orange-100 flex items-center justify-center text-brand-orange flex-shrink-0 shadow-inner">
                                 <i class="fa-solid fa-ruler text-xs"></i>
                             </div>
-                            <span class="text-stone-600">Medição e projeto precisos para cada ambiente</span>
+                            <span class="text-stone-600">Medição e cuidado para cada ambiente</span>
                         </li>
                         <li class="flex items-start gap-4">
                             <div class="mt-1 w-6 h-6 rounded-full bg-orange-100 flex items-center justify-center text-brand-orange flex-shrink-0 shadow-inner">
@@ -506,7 +504,6 @@
                             <span class="text-stone-600">Montagem cuidadosa com ferramentas profissionais</span>
                         </li>
                     </ul>
-
                     <div class="bg-stone-50 border border-stone-200 rounded-xl p-5 mb-8 flex gap-4 items-start shadow-sm">
                         <i class="fa-regular fa-circle-check text-brand-orange text-xl mt-0.5"></i>
                         <div>
@@ -542,7 +539,7 @@
                         <i class="fa-regular fa-message"></i>
                     </div>
                     <h3 class="text-base sm:text-xl font-serif text-white mb-1 sm:mb-3">Contato</h3>
-                    <p class="text-stone-400 text-xs sm:text-sm leading-relaxed">Você chama e descreve o que precisa pelo WhatsApp.</p>
+                    <p class="text-stone-400 text-xs sm:text-sm leading-relaxed">Você chama no Whatsapp e envia uma foto ou descrição do que precisa.</p>
                 </div>
 
                 <div class="bg-brand-card p-4 sm:p-8 rounded-xl border border-white/5 relative z-10 hover:border-brand-orange/50 transition-colors group">
@@ -560,7 +557,7 @@
                         <i class="fa-solid fa-screwdriver-wrench"></i>
                     </div>
                     <h3 class="text-base sm:text-xl font-serif text-white mb-1 sm:mb-3">Execução</h3>
-                    <p class="text-stone-400 text-xs sm:text-sm leading-relaxed">Montagem ou fabricação com precisão, no prazo combinado.</p>
+                    <p class="text-stone-400 text-xs sm:text-sm leading-relaxed">Montagem e execução com precisão, no prazo combinado.</p>
                 </div>
 
                 <div class="bg-brand-card p-4 sm:p-8 rounded-xl border border-white/5 relative z-10 hover:border-brand-orange/50 transition-colors group">
@@ -611,7 +608,7 @@
                             <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                         </div>
                         <p class="text-stone-600 mb-6 italic text-sm leading-relaxed">
-                            "Comprei a mesa de jantar que ele vende e também contratei a montagem. Ficou perfeita, super resistente."
+                            "Comprei a cômoda que ele vende e ganhei a montagem. Ficou impecável, super resistente."
                         </p>
                         <div class="flex items-center gap-3 mt-auto">
                             <div class="w-10 h-10 rounded-full bg-brand-dark text-white flex items-center justify-center font-bold text-sm">R</div>
@@ -654,13 +651,13 @@
             <p class="text-orange-50 text-lg mb-10 max-w-2xl mx-auto">Solicite um orçamento sem compromisso. Atendo toda a região com agilidade e qualidade.</p>
             
             <div class="flex flex-col sm:flex-row justify-center items-center gap-4 mb-6">
-                <a href="https://wa.me/5500000000000" target="_blank" class="w-full sm:w-auto bg-white text-brand-orange px-8 py-4 rounded-md font-bold hover:bg-stone-100 transition flex items-center justify-center gap-2 shadow-xl hover:shadow-2xl hover:-translate-y-1">
+                <a href="https://wa.me/5584987471935" target="_blank" class="w-full sm:w-auto bg-white text-brand-orange px-8 py-4 rounded-md font-bold hover:bg-stone-100 transition flex items-center justify-center gap-2 shadow-xl hover:shadow-2xl hover:-translate-y-1">
                     <i class="fa-brands fa-whatsapp text-xl"></i> Chamar no WhatsApp
                 </a>
             </div>
             
             <div class="inline-flex items-center gap-2 text-white/90 font-medium">
-                <i class="fa-solid fa-phone"></i> (00) 00000-0000
+                <i class="fa-solid fa-phone"></i> (84) 98747-1935
             </div>
         </div>
     </section>
@@ -690,12 +687,7 @@
                     <ul class="space-y-4">
                         <li>
                             <a href="#" class="text-stone-400 hover:text-brand-orange transition text-sm flex items-center gap-3">
-                                <i class="fa-brands fa-whatsapp w-4 text-center"></i> (00) 00000-0000
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="text-stone-400 hover:text-brand-orange transition text-sm flex items-center gap-3">
-                                <i class="fa-regular fa-envelope w-4 text-center"></i> contato@claudiomontador.com.br
+                                <i class="fa-brands fa-whatsapp w-4 text-center"></i> (84) 98747-1935
                             </a>
                         </li>
                         <li class="text-stone-400 text-sm flex items-start gap-3">
@@ -721,7 +713,7 @@
 
             <div class="border-t border-white/10 pt-8 text-center md:text-left flex flex-col md:flex-row justify-between items-center gap-4">
                 <p class="text-stone-500 text-xs">
-                    &copy; 2026 Claudio Montador. Todos os direitos reservados.
+                    &copy; 2026 Claudio Ribeiro. Todos os direitos reservados.
                 </p>
             </div>
         </div>
@@ -736,7 +728,7 @@
             
             // Show modal wrapper
             modal.classList.remove('hidden');
-            
+
             // Trigger animation in next frame
             requestAnimationFrame(() => {
                 modal.classList.remove('opacity-0');
@@ -824,7 +816,31 @@
         document.querySelector('[onclick="closeModal(\'modal-vendas\')"]').addEventListener('click', () => {
             clearInterval(carouselInterval);
         });
-        
+        function enviarWhatsApp(event) {
+            event.preventDefault();
+
+            const nome = document.getElementById('nome').value;
+            const whatsapp = document.getElementById('whatsapp').value;
+            const endereco = document.getElementById('endereco').value;
+            const tipoMovel = document.getElementById('tipo-movel').value;
+
+            const mensagem = `Olá! Gostaria de solicitar um orçamento para montagem.
+
+        👤 Nome: ${nome}
+        📱 WhatsApp: ${whatsapp}
+        📍 Endereço: ${endereco}
+        🪑 Tipo de móvel: ${tipoMovel}
+
+        Gostaria de receber mais informações sobre o serviço.`;
+
+            const numero = '5584987471935';
+
+            const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
+ 
+            window.open(url, '_blank');
+
+            closeModal('modal-montagem');
+        }
     </script>
 </body>
 </html>
